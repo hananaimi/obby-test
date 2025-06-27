@@ -1,0 +1,23 @@
+query_scheduler:
+  replicas: 1
+querier:
+  replicas: 1
+nginx:
+  enabled: false
+gateway:
+  enabledNonEnterprise: true
+compactor:
+  persistentVolume:
+    storageClass: standard
+    compactor_blocks_retention_period: 30d
+ingester:
+  zoneAwareReplication:
+    enabled: false 
+  persistentVolume:
+    storageClass: standard
+
+store_Gateway:
+  zoneAwareReplication:
+    enabled: false
+  persistentVolume:
+    storageClass: standard

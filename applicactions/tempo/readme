@@ -1,0 +1,5 @@
+Command lines:
+
+helm install tempo grafana/tempo-distributed -n tempo -f custom.yaml
+helm upgrade tempo grafana/tempo-distributed -n tempo -f custom.yaml
+helm uninstall tempo grafana/tempo-distributed -n tempo

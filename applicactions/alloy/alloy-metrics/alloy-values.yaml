@@ -1,0 +1,7 @@
+alloy:
+  configMap:
+    create: false
+    name: alloy-metrics-config
+    key: config.alloy
+controller:
+  type: 'deployment'

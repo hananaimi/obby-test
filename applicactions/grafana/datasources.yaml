@@ -1,0 +1,54 @@
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: loki
+        type: loki
+        url: http://loki-gateway.loki
+        access: proxy
+        editable: true
+      - name: Mimir
+        type: prometheus
+        access: proxy
+        orgId: 1
+        url: http://mimir-gateway.mimir.svc.cluster.local/prometheus
+        isDefault: true
+        version: 1
+        editable: true
+        jsonData:
+          httpHeaderName1: "X-Scope-OrgID"
+        secureJsonData:
+          httpHeaderValue1: "pods"
+      - name: Mimir-OtelMetrics
+        type: prometheus
+        access: proxy
+        orgId: 1
+        url: http://mimir-gateway.mimir.svc.cluster.local/prometheus
+        version: 1
+        editable: true
+        jsonData:
+          httpHeaderName1: "X-Scope-OrgID"
+        secureJsonData:
+          httpHeaderValue1: "otelMetrics"
+      - name: Tempo
+        type: tempo
+        access: proxy
+        orgId: 1
+        url: http://tempo-query-frontend.tempo.svc.cluster.local:3200
+        basicAuth: false
+        version: 1
+        editable: true
+        apiVersion: 1
+        uid: tempo
+        jsonData:
+          httpMethod: GET
+          tracesToLogsV2:
+            datasourceUid: 'loki'
+            spanStartTimeShift: '-2m'
+            spanEndTimeShift: '2m'
+            filterByTraceID: true
+            filterBySpanID: true
+          serviceMap:
+            datasourceUid: 'Mimir-OtelMetrics'
+          nodeGraph:
+            enabled: true

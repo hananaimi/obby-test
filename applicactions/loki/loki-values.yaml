@@ -1,0 +1,31 @@
+loki:
+  auth_enabled: false
+  commonConfig:
+    replication_factor: 1
+  schemaConfig:
+    configs:
+      - from: "2024-04-01"
+        store: tsdb
+        object_store: s3
+        schema: v13
+        index:
+          prefix: loki_index_
+          period: 24h
+        chunks:
+          period: 24h
+
+read:
+  replicas: 1
+  persistance:
+    storageClassName: standard
+write:
+  replicas: 1
+  persistance:
+    storageClassName: standard
+backend:
+  replicas: 1
+  persistance:
+    storageClassName: standard
+# Enableling minio for storage
+minio:
+  enabled: true

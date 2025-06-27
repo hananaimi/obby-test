@@ -1,0 +1,19 @@
+For all configMaps:
+k apply -f alloy-configmap.yaml
+
+Command lines for helm:
+
+TRACES
+helm install alloy-traces grafana/alloy -n alloy-traces -f alloy-values.yaml
+helm upgrade alloy-traces grafana/alloy -n alloy-traces -f alloy-values.yaml
+helm uninstall alloy-traces grafana/alloy -n alloy-traces
+
+METRICS
+helm install alloy-metrics grafana/alloy -n alloy-metrics -f alloy-values.yaml
+helm upgrade alloy-metrics grafana/alloy -n alloy-metrics -f alloy-values.yaml
+helm uninstall alloy-metrics grafana/alloy -n alloy-metrics
+
+LOGS
+helm install alloy-logs grafana/alloy -n alloy-logs -f alloy-values.yaml
+helm upgrade alloy-logs grafana/alloy -n alloy-logs -f alloy-values.yaml
+helm uninstall alloy-logs grafana/alloy -n alloy-logs
